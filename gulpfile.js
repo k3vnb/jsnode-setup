@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var buildProduction = utilities.env.production;
 var browserify = require('browserify');
+var jshint = require('gulp-jshint');
 var source = require('vinyl-source-stream');
 var del = require('del');
 
@@ -38,4 +39,9 @@ gulp.task("build", function() {
 });
 gulp.task("clean", function(){
   return del(['build', 'tmp']);
+});
+gulp.task('jshint', function(){
+  return gulp.src(['js/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
